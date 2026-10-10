@@ -1,0 +1,32 @@
+# material-design-colors — Alacritty theme (TOML)
+[colors.primary]
+background = "#1D262A"
+foreground = "#E7EBED"
+
+[colors.cursor]
+text = "#000000"
+cursor = "#EAEAEA"
+
+[colors.selection]
+text = "#E7EBED"
+background = "#4E6A78"
+
+[colors.normal]
+color0 = "#435B67"
+color1 = "#FC3841"
+color2 = "#5CF19E"
+color3 = "#FED032"
+color4 = "#37B6FF"
+color5 = "#FC226E"
+color6 = "#59FFD1"
+color7 = "#FFFFFF"
+
+[colors.bright]
+color8 = "#A1B0B8"
+color9 = "#FC746D"
+color10 = "#ADF7BE"
+color11 = "#FEE16C"
+color12 = "#70CFFF"
+color13 = "#FC669B"
+color14 = "#9AFFE6"
+color15 = "#FFFFFF"

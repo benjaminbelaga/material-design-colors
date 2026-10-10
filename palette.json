@@ -1,0 +1,35 @@
+{
+  "name": "material-design-colors",
+  "author": "Benjamin Belaga",
+  "description": "Dark slate terminal theme (material-design-colors) for CMUX / Ghostty, iTerm2 and friends.",
+  "variant": "dark",
+  "background": "#1D262A",
+  "foreground": "#E7EBED",
+  "cursor": {
+    "text": "#000000",
+    "cursor": "#EAEAEA"
+  },
+  "selection": {
+    "background": "#4E6A78",
+    "foreground": "#E7EBED"
+  },
+  "bold": "#EAEAEA",
+  "ansi": [
+    "#435B67",
+    "#FC3841",
+    "#5CF19E",
+    "#FED032",
+    "#37B6FF",
+    "#FC226E",
+    "#59FFD1",
+    "#FFFFFF",
+    "#A1B0B8",
+    "#FC746D",
+    "#ADF7BE",
+    "#FEE16C",
+    "#70CFFF",
+    "#FC669B",
+    "#9AFFE6",
+    "#FFFFFF"
+  ]
+}

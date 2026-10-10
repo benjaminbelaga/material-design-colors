@@ -1,0 +1,29 @@
+# material-design-colors — WezTerm color scheme (colors/ directory format)
+[colors]
+foreground = "#E7EBED"
+background = "#1D262A"
+cursor_bg = "#EAEAEA"
+cursor_fg = "#000000"
+cursor_border = "#EAEAEA"
+selection_bg = "#4E6A78"
+selection_fg = "#E7EBED"
+
+[colors.ansi]
+black = "#435B67"
+red = "#FC3841"
+green = "#5CF19E"
+yellow = "#FED032"
+blue = "#37B6FF"
+magenta = "#FC226E"
+cyan = "#59FFD1"
+white = "#FFFFFF"
+
+[colors.brights]
+black = "#A1B0B8"
+red = "#FC746D"
+green = "#ADF7BE"
+yellow = "#FEE16C"
+blue = "#70CFFF"
+magenta = "#FC669B"
+cyan = "#9AFFE6"
+white = "#FFFFFF"

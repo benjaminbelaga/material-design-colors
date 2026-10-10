@@ -1,0 +1,25 @@
+# material-design-colors — Warp theme (YAML)
+name: material-design-colors
+accent: '#37B6FF'
+background: '#1D262A'
+details: darker
+foreground: '#E7EBED'
+terminal_colors:
+  normal:
+    black: '#435B67'
+    red: '#FC3841'
+    green: '#5CF19E'
+    yellow: '#FED032'
+    blue: '#37B6FF'
+    magenta: '#FC226E'
+    cyan: '#59FFD1'
+    white: '#FFFFFF'
+  bright:
+    black: '#A1B0B8'
+    red: '#FC746D'
+    green: '#ADF7BE'
+    yellow: '#FEE16C'
+    blue: '#70CFFF'
+    magenta: '#FC669B'
+    cyan: '#9AFFE6'
+    white: '#FFFFFF'
