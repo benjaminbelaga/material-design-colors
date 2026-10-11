@@ -212,11 +212,83 @@ def write_png(path, w, h, rows):
     path.write_bytes(png)
 
 
+def _find_mono_font():
+    candidates = [
+        Path.home() / "Library/Fonts/CaskaydiaCoveNerdFont-Regular.ttf",
+        Path.home() / "Library/Fonts/CaskaydiaCoveNerdFontMono-Regular.ttf",
+        "/Library/Fonts/Menlo.ttc",
+        "/System/Library/Fonts/Menlo.ttc",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+    ]
+    for c in candidates:
+        if Path(c).exists():
+            return str(c)
+    return None
+
+
 def gen_preview(p):
+    """Render a terminal-like preview. Uses Pillow when available, else swatches."""
+    out = ROOT / "preview.png"
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        return _gen_preview_swatches(p, out)
+
+    w, h = 960, 600
+    bg = hex_to_rgb_int(p["background"])
+    fg = hex_to_rgb_int(p["foreground"])
+    img = Image.new("RGB", (w, h), bg)
+    d = ImageDraw.Draw(img)
+    font_path = _find_mono_font()
+    font = ImageFont.truetype(font_path, 15) if font_path else ImageFont.load_default()
+    small = ImageFont.truetype(font_path, 13) if font_path else font
+
+    # Title bar
+    bar = tuple(max(0, c - 12) for c in bg)
+    d.rectangle([0, 0, w, 40], fill=bar)
+    for i, dot in enumerate([(255, 95, 86), (255, 189, 46), (39, 201, 63)]):
+        d.ellipse([18 + i * 24, 13, 34 + i * 24, 29], fill=dot)
+    d.text((w // 2 - 110, 12), "material-design-colors", fill=fg, font=small)
+
+    def line(x, y, spans):
+        for text, color in spans:
+            d.text((x, y), text, fill=color, font=font)
+            x += d.textlength(text, font=font)
+        return y + 26
+
+    y = 64
+    prompt = p["ansi"][2]
+    path_c = p["ansi"][4]
+    y = line(24, y, [("~/material-design-colors ", prompt), ("$ ", fg), ("echo $TERM_PROGRAM", path_c)])
+    y = line(24, y, [("CMUX / Ghostty · iTerm2 · kitty · Alacritty · Warp · WezTerm", fg)])
+    y += 10
+    y = line(24, y, [("normal  ", fg)] + [(f"██ ", p["ansi"][i]) for i in range(8)])
+    y = line(24, y, [("bright  ", fg)] + [(f"██ ", p["ansi"][i]) for i in range(8, 16)])
+    y += 10
+    y = line(24, y, [("error   ", fg), ("command not found: foo", p["ansi"][1])])
+    y = line(24, y, [("warn    ", fg), ("3 files changed, 12 insertions(+)", p["ansi"][3])])
+    y = line(24, y, [("info    ", fg), ("branch ", p["ansi"][6]), ("main", p["ansi"][5]), (" · 2 unpushed", p["ansi"][8])])
+    y = line(24, y, [("comment ", p["ansi"][8]), ("# generated from palette.json", p["ansi"][8])])
+    y += 10
+    # Selection + cursor samples
+    sel = hex_to_rgb_int(p["selection"]["background"])
+    sel_fg = hex_to_rgb_int(p["selection"]["foreground"])
+    d.rectangle([24, y, 24 + int(d.textlength("selected text", font=font)) + 12, y + 24], fill=sel)
+    d.text((30, y + 2), "selected text", fill=sel_fg, font=font)
+    cx = 24 + int(d.textlength("selected text", font=font)) + 36
+    d.text((cx, y + 2), "cursor ", fill=fg, font=font)
+    cw = d.textlength("cursor ", font=font)
+    cur = hex_to_rgb_int(p["cursor"]["cursor"])
+    d.rectangle([cx + cw, y, cx + cw + 12, y + 24], fill=cur)
+
+    img.save(out)
+    return out
+
+
+def _gen_preview_swatches(p, out):
     w, h = 960, 540
     bg = hex_to_rgb_int(p["background"])
     rows = [[bg + (255,)] * w for _ in range(h)]
-    # ANSI 0-7 and 8-15 swatches
     margin, gap = 40, 12
     sw = (w - 2 * margin - 7 * gap) // 8
     for band, base in enumerate((0, 8)):
@@ -227,21 +299,8 @@ def gen_preview(p):
             for y in range(y0, min(y0 + sw, h)):
                 for x in range(x0, min(x0 + sw, w)):
                     rows[y][x] = col + (255,)
-    # Header bar with foreground sample color
-    fg = hex_to_rgb_int(p["foreground"])
-    for y in range(60, 100):
-        for x in range(margin, margin + 420):
-            rows[y][x] = fg + (255,)
-    # Cursor + selection samples
-    cur = hex_to_rgb_int(p["cursor"]["cursor"])
-    sel = hex_to_rgb_int(p["selection"]["background"])
-    for y in range(130, 190):
-        for x in range(margin, margin + 60):
-            rows[y][x] = cur + (255,)
-        for x in range(margin + 90, margin + 330):
-            rows[y][x] = sel + (255,)
-    write_png(ROOT / "preview.png", w, h, rows)
-    return ROOT / "preview.png"
+    write_png(out, w, h, rows)
+    return out
 
 
 def main():

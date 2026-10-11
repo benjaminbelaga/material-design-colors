@@ -15,6 +15,14 @@ A dark slate terminal theme with vivid material-style ANSI colors. Designed for
 
 ## Install
 
+### One-liner (auto-detects your terminal)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/benjaminbelaga/material-design-colors/main/install.sh | bash
+```
+
+Or target a specific terminal: `bash install.sh ghostty|cmux|kitty|alacritty|warp|wezterm|iterm|all`.
+
 ### iTerm2
 
 1. Download [`themes/material-design-colors.itermcolors`](themes/material-design-colors.itermcolors)
