@@ -6,7 +6,7 @@
   "background": "#1D262A",
   "foreground": "#E7EBED",
   "cursor": {
-    "text": "#000000",
+    "text": "#222A2E",
     "cursor": "#EAEAEA"
   },
   "selection": {
@@ -22,7 +22,7 @@
     "#37B6FF",
     "#FC226E",
     "#59FFD1",
-    "#FFFFFF",
+    "#DDE2E4",
     "#A1B0B8",
     "#FC746D",
     "#ADF7BE",
@@ -30,6 +30,6 @@
     "#70CFFF",
     "#FC669B",
     "#9AFFE6",
-    "#FFFFFF"
+    "#E7EBED"
   ]
 }

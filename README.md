@@ -9,7 +9,7 @@ A dark slate terminal theme with vivid material-style ANSI colors. Designed for
 |---|---|
 | Background | `#1D262A` |
 | Foreground | `#E7EBED` |
-| Cursor | `#EAEAEA` (text `#000000`) |
+| Cursor | `#EAEAEA` (text `#222A2E`) |
 | Selection | `#4E6A78` |
 | Palette | 16 ANSI colors — see [`palette.json`](palette.json) |
 

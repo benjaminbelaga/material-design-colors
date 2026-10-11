@@ -4,7 +4,7 @@ background = "#1D262A"
 foreground = "#E7EBED"
 
 [colors.cursor]
-text = "#000000"
+text = "#222A2E"
 cursor = "#EAEAEA"
 
 [colors.selection]
@@ -19,7 +19,7 @@ color3 = "#FED032"
 color4 = "#37B6FF"
 color5 = "#FC226E"
 color6 = "#59FFD1"
-color7 = "#FFFFFF"
+color7 = "#DDE2E4"
 
 [colors.bright]
 color8 = "#A1B0B8"
@@ -29,4 +29,4 @@ color11 = "#FEE16C"
 color12 = "#70CFFF"
 color13 = "#FC669B"
 color14 = "#9AFFE6"
-color15 = "#FFFFFF"
+color15 = "#E7EBED"
